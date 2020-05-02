@@ -1,25 +1,3 @@
-// package main
-
-// import "fmt"
-
-// func main() {
-// 	var n int
-// 	fmt.Scan(&n)
-// 	ans := 0.0
-// 	for i := 0; i < n; i++ {
-// 		var (
-// 			x float64
-// 			u string
-// 		)
-// 		fmt.Scan(&x, &u)
-// 		if u == "BTC" {
-// 			x *= 380000.0
-// 		}
-// 		ans += x
-// 	}
-// 	fmt.Println(ans)
-// }
-
 package main
 
 import (
