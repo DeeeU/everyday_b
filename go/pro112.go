@@ -7,23 +7,31 @@ import (
 	"strconv"
 )
 
+const inf = int(1e10)
+
 var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
-	var n, X int
-	n, X = nextInt(), nextInt()
-	m := make([]int, n)
+	var (
+		n, T int
+		c, t int
+	)
 
-	count := 0
+	n, T = nextInt(), nextInt()
+
+	cost := inf
 
 	for i := 0; i < n; i++ {
-		m[i] = nextInt()
-		if (1<<i)&X != 0 {
-			count += m[i]
+		c, t = nextInt(), nextInt()
+		if cost > c && T >= t {
+			cost = c
 		}
 	}
-
-	fmt.Println(count)
+	if cost != inf {
+		fmt.Println(cost)
+	} else {
+		fmt.Println("TLE")
+	}
 }
 
 func init() {
