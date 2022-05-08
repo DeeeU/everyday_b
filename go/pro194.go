@@ -10,35 +10,34 @@ import (
 var sc = bufio.NewScanner(os.Stdin)
 
 func main() {
-	var n, m int
-	n, m = nextInt(), nextInt()
-	s := make([]int, m)
-	p := make([]int, m)
-
-	for i := 0; i < m; i++ {
-		k := nextInt()
-		for j := 0; j < k; j++ {
-			s[j] = nextInt()
+	var (
+		a, b, n, ma, mb, ans int
+	)
+	n = nextInt()
+	for i := 0; i < n; i++ {
+		a, b = nextInt(), nextInt()
+		if i == 0 {
+			ans = a + b
+			ma = a
+			mb = b
+			continue
+		}
+		if max(ma, b) < ans {
+			ans = max(ma, b)
+		}
+		if max(mb, a) < ans {
+			ans = max(mb, a)
+		}
+		if a+b < ans {
+			ans = a + b
+		}
+		if ma > a {
+			ma = a
+		}
+		if mb > b {
+			mb = b
 		}
 	}
-
-	for i := 0; i < m; i++ {
-		p[i] = nextInt()
-	}
-
-	ans := 0
-	for bit := 0; bit < (1 << n); bit++ {
-		count := 0
-		for j := 0; j < m; j++ {
-			if (bit&s[j])%2 == p[j] {
-				count++
-			}
-		}
-		if count == m {
-			ans++
-		}
-	}
-
 	fmt.Println(ans)
 }
 
@@ -48,16 +47,6 @@ func init() {
 	sc.Buffer(buf, max)
 	sc.Split(bufio.ScanWords)
 	return
-}
-
-func popcnt(x int) int {
-	x = x - x>>1&0x5555555555555555
-	x = x&0x3333333333333333 + x>>2&0x3333333333333333
-	x = (x + x>>4) & 0x0f0f0f0f0f0f0f0f
-	x = x + (x >> 8)
-	x = x + (x >> 16)
-	x = x + (x >> 32)
-	return x & 0x0000007f
 }
 
 func nextInt() int {
